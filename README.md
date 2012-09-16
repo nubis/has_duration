@@ -1,5 +1,3 @@
-# @markup markdown
-
 # HasDuration
 
 Do you use rails time convenience methods? Those things are great, they let you do stuff like `1.day.from_now` or `Time.now - 10.years`. The `10.years` part is an {ActiveSupport::Duration} object.
