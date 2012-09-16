@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.2.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>HasDuration</h1>
+
+<p>Do you use rails time convenience methods? Those things are great, they let you do stuff like <code>1.day.from_now</code> or <code>Time.now - 10.years</code>. The <code>10.years</code> part is an ActiveSupport::Duration object.</p>
+
+<p>This plugin extends ActiveRecord so you can conveniently store durations like: how often to contact a given customer, or how long can your users stay in the bathtub without their fingertips wrinkling.</p>
+
+<h2>Installation: Add this to your Gemfile</h2>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>has_duration</span><span class='tstring_end'>'</span></span>
+</code></pre>
+
+<h2>Given a table defined as:</h2>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_create_table'>create_table</span> <span class='symbol'>:user</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='symbol'>:contact_every</span><span class='comma'>,</span> <span class='label'>null:</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='symbol'>:bathtub_tolerance</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>You can have a model like this</h2>
+
+<pre class="code ruby"><code><span class='kw'>class</span> <span class='const'>User</span> <span class='op'>&lt;</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Base</span>
+  <span class='id identifier rubyid_has_duration'>has_duration</span> <span class='symbol'>:contact_every</span>
+  <span class='comment'># Has duration does not validate presence, you have to do that yourself.
+</span>  <span class='id identifier rubyid_validates'>validates</span> <span class='symbol'>:contact_every</span><span class='comma'>,</span> <span class='label'>presence:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_has_duration'>has_duration</span> <span class='symbol'>:bathtub_tolerance</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_create!'>create!</span><span class='lparen'>(</span><span class='label'>contact_every:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span> <span class='label'>bathtub_tolerance:</span> <span class='int'>30</span><span class='period'>.</span><span class='id identifier rubyid_minutes'>minutes</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>that must be a record</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_customer'>customer</span><span class='period'>.</span><span class='id identifier rubyid_bathtub_tolerance'>bathtub_tolerance</span> <span class='op'>&gt;</span> <span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_hours'>hours</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>If contacted today, next contact would be made on </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_contact_every'>contact_every</span><span class='period'>.</span><span class='id identifier rubyid_from_now'>from_now</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>This project uses MIT-LICENSE.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Sun Sep 16 13:43:32 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.2.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

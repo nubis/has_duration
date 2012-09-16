@@ -31,20 +31,20 @@ module HasDuration
   end
 
   module ActiveRecordExtension
-    # Serializes a duration created with rails convenience methods '1 year', '2 seconds', etc.
+    # Adds a field to your ActiveRecord model that validates and serializes ActiveSupport::Duration objects, like: '1 year', '2 seconds', etc.
     #
     # For example:
-    #    class VisitDuration < ActiveRecord::Base
-    #      has_duration :doctor
-    #      validates :doctor, presence: true
-    #      has_duration :club
-    #    end
+    #       class VisitDuration < ActiveRecord::Base
+    #         has_duration :doctor
+    #         validates :doctor, presence: true
+    #         has_duration :club
+    #       end
     #
-    #    ruby > durations = VisitDuration.create(doctor: 1.hour, club: 4.hours)
-    #    ruby > Time.now
-    #    => 2012-09-16 12:12:22 -0300 
-    #    ruby > durations.doctor.from_now
-    #    => 2012-09-16 13:12:22 -0300 
+    #       # ruby > durations = VisitDuration.create(doctor: 1.hour, club: 4.hours)
+    #       # ruby > Time.now
+    #       # => 2012-09-16 12:12:22 -0300 
+    #       # ruby > durations.doctor.from_now
+    #       # => 2012-09-16 13:12:22 -0300 
     def has_duration(field_name)
       serialize field_name, DurationSerializer
       validates field_name, duration: true

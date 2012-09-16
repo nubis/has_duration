@@ -7,11 +7,13 @@ require "has_duration/version"
 Gem::Specification.new do |s|
   s.name        = "has_duration"
   s.version     = HasDuration::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of HasDuration."
-  s.description = "TODO: Description of HasDuration."
+  s.authors     = ["nubis"]
+  s.email       = ["nubis@woobiz.com.ar"]
+  s.homepage    = "http://github.com/nubis/has_duration"
+  s.summary     = "Extends ActiveRecord to let you store time durations like '1.month' or '10.years'"
+  s.description = "Extends ActiveRecord to let you store time durations like '1.month' or '10.years'.
+It does it by providing a serializer and validator for ActiveSupport::Duration objects.
+"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
