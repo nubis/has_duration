@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 It does it by providing a serializer and validator for ActiveSupport::Duration objects.
 "
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "~> 3.2.8"
 
