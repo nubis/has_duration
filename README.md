@@ -11,7 +11,7 @@ This plugin extends ActiveRecord so you can conveniently store durations like: h
 
 ## Given a table defined as:
 
-    create_table :user do |t|
+    create_table :users do |t|
       t.string :contact_every, null: false
       t.string :bathtub_tolerance
     end
