@@ -1,3 +1,5 @@
+require 'active_record'
+
 # The DurationValidator checks that a given field has an {ActiveSupport::Duration} or nil
 # If you also need presence checks you should use ActiveSupport's built in presence validator.
 # @note
