@@ -20,4 +20,5 @@ It does it by providing a serializer and validator for ActiveSupport::Duration o
   s.add_dependency "rails", "~> 3.2"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec"
 end
