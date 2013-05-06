@@ -1,4 +1,3 @@
-require 'debugger'
 require 'spec_helper'
 
 describe Visit do
