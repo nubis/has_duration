@@ -1,3 +1,4 @@
+require 'debugger'
 require 'spec_helper'
 
 describe Visit do
@@ -32,5 +33,36 @@ describe Visit do
     Visit.update_all('doctor = "blabla"')
     visit.reload
     visit.doctor.should be_nil
+  end
+  
+  it 'Allows setting size and unit separately' do
+    visit = Visit.create!(doctor_unit: 'year', doctor_size: 1)
+    visit.doctor.should == 1.year
+  end
+  
+  it 'Does not set with size alone' do
+    visit = Visit.new(doctor_size: 1)
+    visit.doctor_unit.should be_nil
+    visit.doctor_size.should == '1'
+    visit.doctor.should be_nil
+  end
+
+  it 'Does not set with unit alone' do
+    visit = Visit.new(doctor_unit: 'year')
+    visit.doctor_unit.should == 'year'
+    visit.doctor_size.should be_nil
+    visit.doctor.should be_nil
+  end
+  
+  it 'has accessors for unit and size' do
+    visit = Visit.create!(doctor: 1.year)
+    visit.doctor_unit.should == 'year'
+    visit.doctor_size.should == '1'
+  end
+
+  it 'separate accessors are nil when duration is nil' do
+    visit = Visit.create!(doctor: 1.year)
+    visit.club_unit.should be_nil
+    visit.club_size.should be_nil
   end
 end

@@ -50,6 +50,32 @@ module HasDuration
     def has_duration(field_name)
       serialize field_name, DurationSerializer
       validates field_name, duration: true
+
+      define_method("#{field_name}_unit") do
+        return instance_eval("@#{field_name}_unit") if instance_eval("@#{field_name}_unit")
+        send(field_name).inspect.split(' ').last if send(field_name).is_a?(ActiveSupport::Duration)
+      end
+
+      define_method("#{field_name}_unit=") do |unit|
+        return unless unit =~ /^(year|month|week|day|hour|minute|second)s?$/
+        instance_eval "@#{field_name}_unit = '#{unit}'"
+        if size = instance_eval("@#{field_name}_size")
+          self.send("#{field_name}=", size.to_i.send(unit))
+        end
+      end
+
+      define_method("#{field_name}_size") do
+        return instance_eval("@#{field_name}_size") if instance_eval("@#{field_name}_size")
+        send(field_name).inspect.split(' ').first if send(field_name).is_a?(ActiveSupport::Duration)
+      end
+
+      define_method("#{field_name}_size=") do |size|
+        return unless size.to_s =~ /^(\d{0,10})$/
+        instance_eval "@#{field_name}_size = '#{size}'"
+        if unit = instance_eval("@#{field_name}_unit")
+          self.send("#{field_name}=", size.to_i.send(unit))
+        end
+      end
     end
   end
 end
