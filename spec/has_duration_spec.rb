@@ -64,4 +64,9 @@ describe Visit do
     visit.club_unit.should be_nil
     visit.club_size.should be_nil
   end
+
+  it 'keeps units singular' do
+    visit = Visit.create!(doctor: 2.years)
+    visit.doctor_unit.should == 'year'
+  end
 end
