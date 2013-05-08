@@ -53,7 +53,7 @@ module HasDuration
 
       define_method("#{field_name}_unit") do
         return instance_eval("@#{field_name}_unit") if instance_eval("@#{field_name}_unit")
-        send(field_name).inspect.split(' ').last.gsub('s','') if send(field_name).is_a?(ActiveSupport::Duration)
+        send(field_name).inspect.split(' ').last.singularize if send(field_name).is_a?(ActiveSupport::Duration)
       end
 
       define_method("#{field_name}_unit=") do |unit|

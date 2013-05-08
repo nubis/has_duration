@@ -66,7 +66,7 @@ describe Visit do
   end
 
   it 'keeps units singular' do
-    visit = Visit.create!(doctor: 2.years)
-    visit.doctor_unit.should == 'year'
+    visit = Visit.create!(doctor: 2.seconds)
+    visit.doctor_unit.should == 'second'
   end
 end
